@@ -58,6 +58,6 @@ app.post("/login",async(req,res)=>{
 app.use("/movies",movieRouter)
 
 
-app.listen(8000,()=>{
+app.listen(8001,()=>{
      connection.then(()=>{console.log("connected to db")}).catch((err)=>{console.log(err)})
 })
