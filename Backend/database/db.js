@@ -1,5 +1,5 @@
 const mongoose=require("mongoose");
 require("dotenv").config();
-const connection=mongoose.connect("mongodb+srv://sahilshahu555:harsh123123123@cluster0.ehyj2m8.mongodb.net/MovieApp");
+const connection=mongoose.connect(process.env.MONGO_URI);
 
 module.exports={connection}

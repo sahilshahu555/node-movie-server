@@ -3,7 +3,7 @@ const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 const cors=require("cors");
 require("dotenv").config();
-
+const PORT=process.env.PORT;
 const {connection}=require("./database/db");
 const {UserModel}=require("./models/user.model");
 const {movieRouter} = require("./routes/routes");
@@ -46,7 +46,7 @@ app.post("/login",async(req,res)=>{
         const hashPassword=user.password
         bcrypt.compare(password, hashPassword,(err, result)=> {
             if(result){
-                let token=jwt.sign({ user_id: user._id }, "sahil");
+                let token=jwt.sign({ user_id: user._id },process.env.JWT_SECRET);
                 res.send({msg:"Login successful",token : token })
             }else{
                 res.send({msg:"Login Failed ,invalid credentials"})
@@ -58,6 +58,6 @@ app.post("/login",async(req,res)=>{
 app.use("/movies",movieRouter)
 
 
-app.listen(8001,()=>{
+app.listen(PORT,()=>{
      connection.then(()=>{console.log("connected to db")}).catch((err)=>{console.log(err)})
 })
